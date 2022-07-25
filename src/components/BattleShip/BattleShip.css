@@ -1,0 +1,28 @@
+.battleShip{
+    background-color: #2196F3;
+    flex: 1;
+}
+
+.tablero{
+    display:flex;
+    justify-content: space-around;
+    flex-direction: row;
+    background-color: #2196F3;
+ 
+}
+
+.casillas{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    padding: 10px;
+    justify-content: center;
+}
+
+.casilla{
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+}

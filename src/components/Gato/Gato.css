@@ -1,0 +1,27 @@
+.gato {
+    justify-content: space-between;
+    flex-direction: row;
+
+}
+
+.gato-game{
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    background-color: #2196F3;
+    padding: 10px;
+    justify-content: center;
+}
+
+.gato-casilla{
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.gato-casilla:disabled{
+    cursor: not-allowed;
+    opacity: 1;
+}
