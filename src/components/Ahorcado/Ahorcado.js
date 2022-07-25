@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Ahorcado.css';
+import Popo from '../Popo/Popo';
 import { randomWord } from './Words.js';
 
 import step0 from "../../shared/images/A0.jpg";
@@ -21,7 +22,9 @@ class Ahorcado extends Component {
     this.state = {
       mistake: 0,
       guessed: new Set([]),
-      answer: randomWord()
+      answer: randomWord(),
+      mensaje: "",
+      terminar: false,
     }
   }
 
@@ -55,37 +58,46 @@ class Ahorcado extends Component {
     this.setState({
       mistake: 0,
       guessed: new Set([]),
-      answer: randomWord()
+      answer: randomWord(),
+      terminar: false
     });
   }
 
   render() {
     const gameOver = this.state.mistake >= this.props.maxWrong;
     const isWinner = this.guessedWord().join("") === this.state.answer;
+    let mensaje = this.state.mensaje;
+    let terminar = this.state.terminar;
     let gameStat = this.generateButtons();
 
     if (isWinner) {
-      gameStat = "You Won!!!"
+      mensaje = "Ganaste";
+      terminar = true;
     }
 
     if (gameOver) {
-      gameStat = "You Lost!!!"
+      mensaje = "Perdiste";
+      terminar = true;
     }
 
     return (
-      <div className="Hangman container">
-        <h1 className='text-center'>Hangman</h1>
-        <div className="float-right">Wrong Guesses: {this.state.mistake} of {this.props.maxWrong}</div>
+      <div className="Ahorcado">
+        <Popo
+          text={mensaje}
+          func={this.resetButton}
+          open={terminar}
+        />
+        <h1 className='text'>Ahorcado</h1>
+        <div className="float-right">Fallos: {this.state.mistake} de {this.props.maxWrong}</div>
         <div className="text-center">
           <img src={this.props.images[this.state.mistake]} alt=""/>
         </div>
         <div className="text-center">
-          <p>Guess the Programming Language:</p>
+          <p>Adivina la palabra relacionada con programacion:</p>
           <p>
             {!gameOver ? this.guessedWord() : this.state.answer}
           </p>
           <p>{gameStat}</p>
-          <button className='btn btn-info' onClick={this.resetButton}>Reset</button>
         </div>
       </div>
     )

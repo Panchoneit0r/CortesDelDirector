@@ -1,19 +1,19 @@
 var programming_languages = [
 	"python",
 	"javascript",
-	"mongodb",
+	"chicken",
 	"json",
 	"java",
 	"html",
 	"css",
     "c",
 	"csharp",
-	"golang",
-	"kotlin",
+	"for",
+	"while",
 	"php",
 	"sql",
-    "ruby",
-    "fortran"
+    "if",
+    "else"
 ]
 
 function randomWord() {

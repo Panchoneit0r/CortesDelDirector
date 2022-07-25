@@ -3,12 +3,10 @@ import Popo from '../Popo/Popo';
 import "./BattleShip.css";
 
 const casillasVacias = [
-  "", "", "", "", "", "",
-  "", "", "", "", "", "",
-  "", "", "", "", "", "",
-  "", "", "", "", "", "",
-  "", "", "", "", "", "",
-  "", "", "", "", "", "",
+  "", "", "", "",
+  "", "", "", "", 
+  "", "", "", "",
+  "", "", "", "",
 ];
 
 export default function BattleShip (){
@@ -18,9 +16,10 @@ export default function BattleShip (){
   const[elegidos, setElegidos] = useState(false);
   const[count, setCount] = useState(0);
   const [mensaje, setMensaje] = useState("");
+  const [aviso, setAviso] = useState("");
 
   useEffect(() => {
-    if(count === 6) {
+    if(count === 4) {
       setElegidos(true)
       elegirCpu(false, casillasCpu);
     };
@@ -56,7 +55,7 @@ export default function BattleShip (){
   };
 
   const elegirCpu = (atacar, cas) =>{
-    let random = generateRandomNumber(36);
+    let random = generateRandomNumber(16);
     let acaba = false;
     let casillas = [...cas];
     if (atacar){
@@ -65,12 +64,12 @@ export default function BattleShip (){
         casillas[random] = "a";
         acaba = true;
       }
-        random = generateRandomNumber(36);
+        random = generateRandomNumber(16);
       }
       setCasillasJugador(casillas);
     }
     else{
-      for(let i=0; i < 6; i++){
+      for(let i=0; i < 4; i++){
         while(acaba === false) {
           if (casillas[random] === ""){
           casillas[random] = "b";
@@ -85,6 +84,8 @@ export default function BattleShip (){
 
   const atqueJugador = (casilla) =>{
     let casillas = [...casillasCpu];
+    if(casillas[casilla]==="b") setAviso("Tumbaste mi nave")
+    else setAviso("No le diste")
     casillas[casilla] = "a";
     setCasillasCpu(casillas);
     elegirCpu(true, casillasJugador);
@@ -95,6 +96,7 @@ export default function BattleShip (){
     setCasillasCpu(casillasVacias);
     setTerminar(false);
     setMensaje("");
+    setAviso("");
     setElegidos(false);
     setCount(0);
   };
@@ -130,6 +132,7 @@ export default function BattleShip (){
               {casilla}
             </button>)
           })}
+           <p>Elige tus casillas</p>
         </div>
       </div>
       :
@@ -140,6 +143,7 @@ export default function BattleShip (){
               {casilla}
             </div>
           ))}
+            <p>Jugador</p>
         </div>
         <div className="casillas">
         {casillasCpu.map((casilla,i)=>{
@@ -151,6 +155,7 @@ export default function BattleShip (){
                 {vacio}
               </button>)
           })}
+          <p>cpu: {aviso}</p>
         </div>
       </div>
       }
